@@ -8,7 +8,11 @@ export function useLoginForm() {
   const store = useStore();
   const router = useRouter();
   const { handleSubmit, isSubmitting, submitCount } = useForm();
-  const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
+  const {
+    value: email,
+    errorMessage: eError,
+    handleBlur: eBlur,
+  } = useField(
     'email',
     yup
       .string()
@@ -26,7 +30,11 @@ export function useLoginForm() {
     }
   });
 
-  const { value: password, errorMessage: pError, handleBlur: pBlur } = useField(
+  const {
+    value: password,
+    errorMessage: pError,
+    handleBlur: pBlur,
+  } = useField(
     'password',
     yup
       .string()
@@ -36,8 +44,13 @@ export function useLoginForm() {
   );
 
   const onSubmit = handleSubmit(async (values) => {
-    await store.dispatch('auth/onLogin', values);
-    router.push('/');
+    try {
+      console.log('Form', values);
+      await store.dispatch('auth/onLogin', values);
+      router.push('/');
+    } catch (e) {
+      console.log('err login-form');
+    }
   });
 
   return {

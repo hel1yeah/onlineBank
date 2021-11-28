@@ -31,6 +31,7 @@ export default {
         commit('setTokin', data.idToken);
       } catch (e) {
         console.log(error(e.response.data.error.message));
+        throw new Error(e);
       }
     },
     onLogout(store) {
