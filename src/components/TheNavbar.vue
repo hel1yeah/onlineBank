@@ -14,14 +14,27 @@
         <a href="#">messages</a>
       </li>
       <li class="navbar-menu__item">
-        <a href="#">exit</a>
+        <a href="#" @click.prevent="onLogout">exit</a>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-export default {};
+import { useRouter } from 'vue-router';
+import { useStore } from 'vuex';
+
+export default {
+  setup() {
+    const router = useRouter();
+    const store = useStore();
+    const onLogout = () => {
+      router.push('/auth');
+      store.dispatch('auth/onLogout');
+    };
+    return { onLogout };
+  },
+};
 </script>
 
 <style>

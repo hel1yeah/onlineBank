@@ -44,60 +44,11 @@
 </template>
 
 <script>
-import { computed, watch } from 'vue';
-import { useField, useForm } from 'vee-validate';
-import * as yup from 'yup';
+import { useLoginForm } from './../use/login-form.js';
 
 export default {
   setup() {
-    const { handleSubmit, isSubmitting, submitCount } = useForm();
-    const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
-      'email',
-      yup
-        .string()
-        .trim()
-        .required('email is required')
-        .email('incorrect email')
-        .min(3)
-    );
-
-    const isManyLoginAttempts = computed(() => submitCount.value >= 3);
-
-    watch(isManyLoginAttempts, (val) => {
-      if (val) {
-        setTimeout(() => (submitCount.value = 0), 1500);
-      }
-    });
-
-    const {
-      value: password,
-      errorMessage: pError,
-      handleBlur: pBlur,
-    } = useField(
-      'password',
-      yup
-        .string()
-        .trim()
-        .required('password is required')
-        .min(6, 'minimum password length 6 letters')
-    );
-
-    const onSubmit = handleSubmit((values) => {
-      console.log(form);
-    });
-
-    return {
-      email,
-      password,
-      eError,
-      pError,
-      eBlur,
-      pBlur,
-
-      onSubmit,
-      isSubmitting,
-      isManyLoginAttempts,
-    };
+    return { ...useLoginForm() };
   },
 };
 </script>
