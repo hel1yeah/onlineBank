@@ -1,7 +1,7 @@
 {
-  "name": "vue-practice-app",
+  "name": "online-bank",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build"
