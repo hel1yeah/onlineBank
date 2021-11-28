@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import store from '../store/index';
 import Home from '../views/Home.vue';
 import Help from '../views/Help.vue';
 import Auth from '../views/Auth.vue';
@@ -10,6 +11,7 @@ const routes = [
     component: Home,
     meta: {
       layout: 'main',
+      auth: true,
     },
   },
   {
@@ -18,6 +20,7 @@ const routes = [
     component: Help,
     meta: {
       layout: 'main',
+      auth: true,
     },
   },
   {
@@ -26,6 +29,7 @@ const routes = [
     component: Auth,
     meta: {
       layout: 'auth',
+      auth: false,
     },
   },
 ];
@@ -33,6 +37,18 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+});
+
+router.beforeEach((to, from, next) => {
+  const requiredAuth = to.meta.auth;
+
+  if (requiredAuth && store.getters['auth/isAutheticated']) {
+    next();
+  } else if (requiredAuth && !store.getters['auth/isAutheticated']) {
+    next('/auth?message=auth');
+  } else {
+    next();
+  }
 });
 
 export default router;
