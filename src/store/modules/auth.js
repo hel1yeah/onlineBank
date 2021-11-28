@@ -1,3 +1,6 @@
+import axios from 'axios';
+import { error } from './../../untils/error';
+
 const TOKEN_KEY = 'jwt-token';
 export default {
   namespaced: true,
@@ -19,7 +22,16 @@ export default {
   },
   actions: {
     async onLogin({ commit }, payload) {
-      commit('setTokin', 'testTokin');
+      try {
+        const URL = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.VUE_APP_FB_KEY}`;
+        const { data } = await axios.post(URL, {
+          ...payload,
+          returnSecureToken: true,
+        });
+        commit('setTokin', data.idToken);
+      } catch (e) {
+        console.log(error(e.response.data.error.message));
+      }
     },
     onLogout(store) {
       console.log('onLogout');
