@@ -3,6 +3,7 @@ const ERROR_CODES = {
   INVALID_PASSWORD: 'Invalid password',
   INVALID_CUSTOM_TOKEN: 'INVALID_CUSTOM_TOKEN ',
   MISSING_CUSTOM_TOKEN: 'MISSING_CUSTOM_TOKEN',
+  auth: 'Please login in system',
 };
 
 export function error(code) {

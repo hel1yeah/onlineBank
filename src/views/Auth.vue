@@ -40,9 +40,21 @@
 
 <script>
 import { useLoginForm } from './../use/login-form.js';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { error } from './../untils/error';
 
 export default {
   setup() {
+    const route = useRoute();
+    const store = useStore();
+
+    if (route.query.message === 'auth') {
+      store.dispatch('setMessage', {
+        value: error(route.query.message),
+        type: 'warning',
+      });
+    }
     return { ...useLoginForm() };
   },
 };
