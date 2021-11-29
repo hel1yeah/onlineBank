@@ -8,7 +8,11 @@ export function useLoginForm() {
   const store = useStore();
   const router = useRouter();
   const { handleSubmit, isSubmitting, submitCount } = useForm();
-  const { value: email, errorMessage: eError, handleBlur: eBlur } = useField(
+  const {
+    value: email,
+    errorMessage: eError,
+    handleBlur: eBlur,
+  } = useField(
     'email',
     yup
       .string()
@@ -22,11 +26,15 @@ export function useLoginForm() {
 
   watch(isManyLoginAttempts, (val) => {
     if (val) {
-      setTimeout(() => (submitCount.value = 0), 300000);
+      setTimeout(() => (submitCount.value = 0), 5000);
     }
   });
 
-  const { value: password, errorMessage: pError, handleBlur: pBlur } = useField(
+  const {
+    value: password,
+    errorMessage: pError,
+    handleBlur: pBlur,
+  } = useField(
     'password',
     yup
       .string()
@@ -36,8 +44,10 @@ export function useLoginForm() {
   );
 
   const onSubmit = handleSubmit(async (values) => {
-    await store.dispatch('auth/onLogin', values);
-    router.push('/');
+    try {
+      await store.dispatch('auth/onLogin', values);
+      router.push('/');
+    } catch (e) {}
   });
 
   return {
