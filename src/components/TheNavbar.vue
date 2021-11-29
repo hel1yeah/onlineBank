@@ -8,7 +8,7 @@
         >
       </li>
       <li class="navbar-menu__item">
-        <router-link to="/">help</router-link>
+        <router-link to="/help">help</router-link>
       </li>
       <li class="navbar-menu__item">
         <a href="#">messages</a>
@@ -39,6 +39,10 @@ export default {
 
 <style>
 .navbar-menu__item-link {
+  /* text-transform: uppercase; */
+}
+
+.navbar-menu__item-link::first-letter {
   text-transform: uppercase;
 }
 </style>

@@ -4,9 +4,7 @@
 
     <div :class="['form-control', { invalid: eError }]">
       <label class="form-control__label">
-        <h3>
-          Email
-        </h3>
+        <h3>Email</h3>
         <input
           v-model="email"
           class="form-control__input-email"
@@ -37,17 +35,26 @@
       Come in
     </button>
     <br />
-    <span class="text-denger" v-if="isManyLoginAttempts">
-      many Login Attempts
-    </span>
   </form>
 </template>
 
 <script>
 import { useLoginForm } from './../use/login-form.js';
+import { useRoute } from 'vue-router';
+import { useStore } from 'vuex';
+import { error } from './../untils/error';
 
 export default {
   setup() {
+    const route = useRoute();
+    const store = useStore();
+
+    if (route.query.message === 'auth') {
+      store.dispatch('setMessage', {
+        value: error(route.query.message),
+        type: 'warning',
+      });
+    }
     return { ...useLoginForm() };
   },
 };
