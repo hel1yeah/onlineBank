@@ -26,7 +26,7 @@ export function useLoginForm() {
 
   watch(isManyLoginAttempts, (val) => {
     if (val) {
-      setTimeout(() => (submitCount.value = 0), 300000);
+      setTimeout(() => (submitCount.value = 0), 5000);
     }
   });
 
@@ -45,11 +45,11 @@ export function useLoginForm() {
 
   const onSubmit = handleSubmit(async (values) => {
     try {
-      console.log('Form', values);
+      // console.log('Form', values);
       await store.dispatch('auth/onLogin', values);
       router.push('/');
     } catch (e) {
-      console.log('err login-form');
+      // console.log('err login-form');
     }
   });
 

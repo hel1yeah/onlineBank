@@ -4,9 +4,7 @@
 
     <div :class="['form-control', { invalid: eError }]">
       <label class="form-control__label">
-        <h3>
-          Email
-        </h3>
+        <h3>Email</h3>
         <input
           v-model="email"
           class="form-control__input-email"
@@ -37,9 +35,6 @@
       Come in
     </button>
     <br />
-    <span class="text-denger" v-if="isManyLoginAttempts">
-      many Login Attempts
-    </span>
   </form>
 </template>
 
