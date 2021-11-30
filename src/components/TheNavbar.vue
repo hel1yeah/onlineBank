@@ -4,17 +4,17 @@
     <ul class="navbar-menu">
       <li class="navbar-menu__item">
         <router-link to="/" class="navbar-menu__item-link"
-          >applications</router-link
+          >Applications</router-link
         >
       </li>
       <li class="navbar-menu__item">
-        <router-link to="/help">help</router-link>
+        <router-link to="/help">Help</router-link>
       </li>
       <li class="navbar-menu__item">
-        <a href="#">messages</a>
+        <a href="#">Messages</a>
       </li>
       <li class="navbar-menu__item">
-        <a href="#" @click.prevent="onLogout">exit</a>
+        <a href="#" @click.prevent="onLogout">Exit</a>
       </li>
     </ul>
   </div>
