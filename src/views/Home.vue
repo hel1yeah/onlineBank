@@ -7,6 +7,7 @@
 
     <teleport to="body">
       <app-modal v-if="modal" title="Created request" @closeModal="closeModal">
+        <request-modal></request-modal>
       </app-modal>
     </teleport>
   </app-page>
@@ -16,12 +17,13 @@
 import { ref } from 'vue';
 import AppPage from './../components/ui/AppPage.vue';
 import RequestTable from './../components/request/RequestTable.vue';
+import RequestModal from './../components/request/RequestModal.vue';
 import AppModal from './../components/ui/AppModal.vue';
 
 export default {
-  components: { AppPage, RequestTable, AppModal },
+  components: { AppPage, RequestTable, RequestModal, AppModal },
   setup() {
-    const modal = ref(true);
+    const modal = ref(false);
 
     const openModal = () => (modal.value = true);
     const closeModal = () => (modal.value = false);
