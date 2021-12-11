@@ -19,7 +19,13 @@ export default {
     async createRequest({ commit, dispatch }, payload) {
       try {
         const token = store.getters['auth/token'];
-        const data = await axios.post(`./requests.json?auth=${token}`, payload);
+        const { data } = await axios.post(
+          `/requests.json?auth=${token}`,
+          payload
+        );
+
+        console.log(data);
+        commit('addRequest', { ...payload, id: data.name });
         dispatch(
           'setMessage',
           {
@@ -28,18 +34,22 @@ export default {
           },
           { root: true }
         );
-
-        console.log(data);
       } catch (err) {
+        console.log(err);
         dispatch(
           'setMessage',
           {
             value: err.message,
-            type: 'Error',
+            type: 'warning',
           },
           { root: true }
         );
       }
+    },
+  },
+  getters: {
+    setRequest(state) {
+      return state.requests;
     },
   },
 };

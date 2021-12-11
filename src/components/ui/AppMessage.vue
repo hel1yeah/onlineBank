@@ -15,8 +15,8 @@ export default {
     const store = useStore();
     const TITLE_MAP = {
       primary: 'primary',
-      danger: 'Error',
-      warning: 'Warning',
+      danger: 'danger',
+      warning: 'warning',
     };
     const message = computed(() => store.getters.getMessage);
     const title = computed(() =>
