@@ -14,7 +14,7 @@ export default {
   setup() {
     const store = useStore();
     const TITLE_MAP = {
-      primary: 'Success',
+      primary: 'primary',
       danger: 'Error',
       warning: 'Warning',
     };
@@ -24,7 +24,7 @@ export default {
     );
 
     function closeMessage() {
-      store.getters.clearMessage;
+      store.dispatch('clearMessage');
     }
 
     return { message, title, closeMessage };

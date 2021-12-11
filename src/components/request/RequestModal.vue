@@ -3,7 +3,7 @@
     <div class="form-control" :class="{ invalid: fError }">
       <label>
         Full name
-        <input type="text" v-model="fullName" @blur="fBlur" />
+        <input type="text" autocomplete="on" v-model="fullName" @blur="fBlur" />
       </label>
       <small v-if="fError">{{ fError }}</small>
     </div>
@@ -26,25 +26,33 @@
 
     <div class="form-control">
       <label for="status"> Status</label>
-      <select id="status">
+      <select id="status" v-model="status">
         <option value="done">Finished</option>
         <option value="cancelled">Canceled</option>
         <option value="active">Active</option>
-        <option value="Pending">Pending</option>
+        <option value="pending">Pending</option>
       </select>
     </div>
 
-    <button class="btn primary" :disabled="isSubmitting">Created</button>
+    <button class="btn primary" type="submit" :disabled="isSubmitting">
+      Created
+    </button>
   </form>
 </template>
 
 <script>
 import useRequestForm from './../../use/request-form';
-
+import { useStore } from 'vuex';
 export default {
-  setup() {
+  emits: ['created'],
+  setup(_, { emit }) {
+    const store = useStore();
+    const onSubmit = async (values) => {
+      await store.dispatch('request/createRequest', values);
+      emit('created');
+    };
     return {
-      ...useRequestForm(),
+      ...useRequestForm(onSubmit),
     };
   },
 };
