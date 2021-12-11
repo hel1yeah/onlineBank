@@ -23,8 +23,6 @@ export default {
           `/requests.json?auth=${token}`,
           payload
         );
-
-        console.log(data);
         commit('addRequest', { ...payload, id: data.name });
         dispatch(
           'setMessage',

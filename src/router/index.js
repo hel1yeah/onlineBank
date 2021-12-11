@@ -32,6 +32,15 @@ const routes = [
       auth: false,
     },
   },
+  {
+    path: '/request',
+    name: 'Request',
+    component: Auth,
+    meta: {
+      layout: 'main',
+      auth: true,
+    },
+  },
 ];
 
 const router = createRouter({
