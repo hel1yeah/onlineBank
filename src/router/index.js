@@ -3,6 +3,7 @@ import store from '../store/index';
 import Home from '../views/Home.vue';
 import Help from '../views/Help.vue';
 import Auth from '../views/Auth.vue';
+import Messages from '../views/Messages.vue';
 
 const routes = [
   {
@@ -36,6 +37,15 @@ const routes = [
     path: '/request',
     name: 'Request',
     component: Auth,
+    meta: {
+      layout: 'main',
+      auth: true,
+    },
+  },
+  {
+    path: '/messages',
+    name: 'Messages',
+    component: Messages,
     meta: {
       layout: 'main',
       auth: true,

@@ -11,7 +11,7 @@
         <router-link to="/help">Help</router-link>
       </li>
       <li class="navbar-menu__item">
-        <a href="#">Messages</a>
+        <router-link :to="{ name: 'Messages' }">Messages</router-link>
       </li>
       <li class="navbar-menu__item">
         <a href="#" @click.prevent="onLogout">Exit</a>
