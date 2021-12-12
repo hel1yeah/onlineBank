@@ -16,8 +16,9 @@
         <td>{{ index + 1 }}</td>
         <td>{{ item.fullName }}</td>
         <td>{{ item.phone }}</td>
-        <td>{{ item.sum }}</td>
-        <td>{{ item.status }}</td>
+        <td>{{ currentcy(item.sum) }}</td>
+        <!-- <td>{{ item.status }}</td> -->
+        <td><app-status :type="item.status"></app-status></td>
         <td>
           <router-link
             v-slot="{ navigate }"
@@ -33,11 +34,18 @@
 </template>
 
 <script>
+import { currentcy } from './../../untils/currency.js';
+
+import AppStatus from './../ui/AppStatus.vue';
+
 export default {
   name: 'RequestTable',
   props: ['requests'],
+  components: {
+    AppStatus,
+  },
   setup() {
-    // console.log(requests);
+    return { currentcy };
   },
 };
 </script>
